@@ -1,0 +1,9 @@
+development:
+  bsoft_api_url: http://10.7.3.22:8080/broker/api
+
+staging:
+  bsoft_api_url: http://10.7.3.22:8080/broker/api
+
+
+production:
+  bsoft_api_url: http://apilb.anpi.com/broker/api

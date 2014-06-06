@@ -1,0 +1,64 @@
+<script type="text/javascript" charset="utf-8">
+    $(function() {
+        new Highcharts.Chart({
+            chart: {
+                renderTo: "licenses_chart"
+            },
+            title: {
+                text: "Availability"
+            },
+            xAxis: {
+                title: {
+                    text: "services"
+                }
+            },
+            yAxis: {
+                title: {
+                    text: "licenses"
+                }
+            },
+            series: [
+                {
+                    name: "<%= @services.map {|service| service.name.gsub("&quote","")} %>",
+                    data: <%= @services.map{ |service| service.available.to_s.gsub("Unlimited","").to_f}%>
+                }
+            ]
+        });
+    });
+</script>
+
+<div id="licenses_chart" style="width:560px; height:300px;"></div>
+<h1>Listing services</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Licensed</th>
+      <th>Used</th>
+      <th>Used by Hosted users</th>
+      <th>Used by Trunk users</th>
+      <th>Expiration date</th>
+      <th>Available</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @services.each do |service| %>
+      <tr>
+        <td><%= service.service_type %></td>
+        <td><%= service.name %></td>
+        <td><%= service.licensed %></td>
+        <td><%= service.used %></td>
+        <td><%= service.used_by_hosted_users %></td>
+        <td><%= service.used_by_trunk_users %></td>
+        <td><%= service.expiration_date %></td>
+        <td><%= service.available %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
